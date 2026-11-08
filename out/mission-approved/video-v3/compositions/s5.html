@@ -1,0 +1,33 @@
+<!-- v3 장면 5 (270–345f): 04-approved 폰 왼쪽 (x 192) + 오른쪽 타이포
+  push-in 1.3배 40f (15f부터, 중심 = 화면 속 "승인 완료" 배지 273 · 434). 확대 뒤 폰 오른쪽 끝 725 → 글은 770 (+ space-content ×2.8 45)
+  글: "승인 완료" video-eyebrow accent · "결과물이 승인되어 / 내 자산에 등록됐어요." video-title — motion-list (6f, 8f 간격). 문구: 04-approved 화면 -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s5-phone { position: absolute; left: 192px; top: 76px; width: 429px; height: 928px;
+      border-radius: 13px; border: 1px solid #75777c; overflow: hidden; box-shadow: 0 9px 26px #0000001f; }
+    #s5-phone img { display: block; width: 100%; height: 100%; }
+    #s5-cam { position: absolute; inset: 0; }
+    #s5-text { position: absolute; left: 770px; top: 405px; width: 958px; font-family: "Pretendard", sans-serif; }
+    #s5-eyebrow { font-weight: 600; font-size: 31px; line-height: 45px; color: #edf1ff; opacity: 0; }
+    #s5-title { margin-top: 45px; font-weight: 600; font-size: 67px; line-height: 90px; color: #ffffff; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s5" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="s5-clip" class="clip" data-start="0" data-duration="2.5">
+      <div id="s5-cam"><div id="s5-phone"><img src="assets/screens/04-approved.png" alt="" /></div></div>
+      <div id="s5-text">
+        <p id="s5-eyebrow">승인 완료</p>
+        <p id="s5-title">결과물이 승인되어<br>내 자산에 등록됐어요.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    ["#s5-eyebrow", "#s5-title"].forEach((sel, i) =>
+      tl.fromTo(sel, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, f(6 + i * 8)));
+    tl.set("#s5-cam", { transformOrigin: "273px 434px" }, 0);
+    tl.fromTo("#s5-cam", { scale: 1 }, { scale: 1.3, duration: f(40), ease: "ease-standard" }, f(15));
+    window.__timelines["s5"] = tl;
+  </script>
+</template>

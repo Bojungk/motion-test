@@ -1,0 +1,69 @@
+<!-- 장면 3 (165–225f): src/parts/mission-card.html 을 그대로 옮겨 ×2.8 (video.md 5장). 980×708 가운데
+  진행 바 채움: duration-long 24f + ease-standard (motion.md 3장), 0 → 0.5(부품 기본값) -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s3-wrap { position: absolute; left: 785px; top: 415.8px; width: 350px; height: 253px; transform-origin: 50% 50%; }
+    /* ↓ src/parts/mission-card.html 스타일 그대로 */
+    #mission-card {
+      --color-bg: #ffffff; --color-text: #18191b; --color-text-muted: #75777c; --color-primary: #3759de;
+      --color-on-primary: #ffffff; --color-character-bg: #e3f2fd; --color-illustration-dce2f2: #dce2f2; --color-illustration-ebeef5: #ebeef5;
+      box-sizing: border-box; width: 350px; padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow: hidden;
+      border: 1px solid var(--color-illustration-dce2f2); border-radius: 12px; background: var(--color-bg);
+      font-family: "Pretendard", sans-serif; box-shadow: 0 4px 12px #00000014;
+    }
+    #mission-card p { margin: 0; }
+    #mission-card .cover { width: 318px; display: flex; align-items: flex-start; gap: 12px; overflow: hidden; }
+    #mission-card .copy { width: 218px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+    #mission-card .caption { font-weight: 400; font-size: 12px; line-height: 16px; white-space: pre-wrap; }
+    #mission-card .eyebrow { color: var(--color-primary); }
+    #mission-card .title { font-weight: 700; font-size: 22px; line-height: 28px; color: var(--color-text); }
+    #mission-card .character { flex: none; width: 88px; height: 96px; overflow: hidden; background: var(--color-character-bg); }
+    #mission-card .character img { display: block; width: 88px; height: 96px; object-fit: contain; }
+    #mission-card .deliverables { width: 318px; color: var(--color-text-muted); }
+    #mission-card .progress { width: 318px; display: flex; flex-direction: column; gap: 8px; }
+    #mission-card .progress-labels { display: flex; }
+    #mission-card #mission-card-progress-text { width: 190px; color: var(--color-primary); }
+    #mission-card .due { width: 128px; color: var(--color-text-muted); text-align: right; }
+    #mission-card .track { position: relative; width: 318px; height: 3px; overflow: hidden; border-radius: 1.5px; background: var(--color-illustration-ebeef5); }
+    #mission-card-progress-fill { position: absolute; left: 0; top: 0; width: 318px; height: 3px; border-radius: 1.5px; background: var(--color-primary); transform-origin: 0 50%; }
+    #mission-card .button { box-sizing: border-box; width: 318px; padding: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px; background: var(--color-primary); }
+    #mission-card .button p { flex: 1 0 0; font-weight: 600; font-size: 14px; line-height: 20px; color: var(--color-on-primary); text-align: center; }
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1920" data-height="1080">
+    <div id="s3-clip" class="clip" data-start="0" data-duration="2">
+      <div id="s3-wrap">
+        <div id="s3-in">
+          <div id="mission-card">
+            <div class="cover">
+              <div class="copy">
+                <p class="caption eyebrow">이번 달 미션  ·  D–12</p>
+                <p class="title">반복 업무를 줄이는<br>AI 자동화</p>
+              </div>
+              <div class="character"><img src="assets/perdi-flag.png" alt=""></div>
+            </div>
+            <p class="caption deliverables">자동화 자산 1개 + 실제 적용 사례 1개</p>
+            <div class="progress">
+              <div class="progress-labels">
+                <p id="mission-card-progress-text" class="caption">50% · 2/4 단계 완료</p>
+                <p class="caption due">9월 30일 마감</p>
+              </div>
+              <div class="track"><div id="mission-card-progress-fill"></div></div>
+            </div>
+            <div class="button"><p>적용 사례 정리하기 →</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#s3-wrap", { scale: 2.8 }, 0); // video-part-scale
+    // motion-appear: 6f · ease-enter · 아래 16px · 투명도 0
+    tl.fromTo("#s3-in", { y: 16 / 2.8, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, 0);
+    // hold-beat 15f 뒤 진행 바 0 → 0.5 : duration-long 24f · ease-standard
+    tl.fromTo("#mission-card-progress-fill", { scaleX: 0 }, { scaleX: 0.5, duration: f(24), ease: "ease-standard" }, f(21));
+    window.__timelines["s3"] = tl;
+  </script>
+</template>

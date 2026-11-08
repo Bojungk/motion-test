@@ -1,0 +1,35 @@
+<!-- v3 장면 4 (225–270f): 위 "결과물 제출" video-headline · 가운데 button-submit ×2.8 (980×123) · 아래 "파일과 적용 사례를 함께 제출해주세요." video-body muted
+  세로: 95 + 90 + 123 + 90 + 67 = 465 → 위 307 (간격 space-large ×2.8 = 90). 문구: 03-mission 화면
+  motion-list (0 · 8 · 16f, 6f ease-enter) → 버튼 motion-exit 4f (30f, 8.5초 클릭음) -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s4-head { position: absolute; left: 0; right: 0; top: 307px; text-align: center;
+      font-family: "Pretendard", sans-serif; font-weight: 700; font-size: 78px; line-height: 95px; color: #ffffff; opacity: 0; }
+    #s4-wrap { position: absolute; left: 785px; top: 531.5px; width: 350px; height: 44px; transform-origin: 50% 50%; }
+    #s4-body { position: absolute; left: 0; right: 0; top: 705px; text-align: center;
+      font-family: "Pretendard", sans-serif; font-weight: 400; font-size: 42px; line-height: 67px; color: #75777c; opacity: 0; }
+    /* ↓ src/parts/button-submit.html 스타일 그대로 (submit 상태) */
+    #button-submit { box-sizing: border-box; width: 350px; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;
+      overflow: hidden; border-radius: 8px; background: #3759de; }
+    #button-submit .label { flex: 1 0 0; min-width: 1px; margin: 0; font-family: "Pretendard", sans-serif;
+      font-weight: 600; font-size: 14px; line-height: 20px; color: #ffffff; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <div id="s4-clip" class="clip" data-start="0" data-duration="1.5">
+      <p id="s4-head">결과물 제출</p>
+      <div id="s4-wrap"><div id="s4-in"><div id="button-submit" data-state="submit"><p class="label">제출하기</p></div></div></div>
+      <p id="s4-body">파일과 적용 사례를 함께 제출해주세요.</p>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#s4-wrap", { scale: 2.8 }, 0);
+    tl.fromTo("#s4-head", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, 0);
+    tl.fromTo("#s4-in", { y: 16 / 2.8, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, f(8));
+    tl.fromTo("#s4-body", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, f(16));
+    tl.to("#s4-in", { opacity: 0, duration: f(4), ease: "ease-exit" }, f(30));
+    window.__timelines["s4"] = tl;
+  </script>
+</template>

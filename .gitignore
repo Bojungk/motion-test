@@ -1,1 +1,6 @@
 .DS_Store
+
+# HyperFrames 작업 기록 · 캐시
+.hyperframes/
+.media/
+node_modules/

@@ -1,0 +1,29 @@
+<!-- v3 장면 1 (0–60f): "이번 달 미션" video-headline 78/95 typewriter (stagger-type 4f · 글자당 duration-instant 2f)
+  + "반복 업무를 줄이는 AI 자동화" video-title 67/90 600 · motion-appear (32f). 줄 간격 space-content ×2.8 = 45. 문구: 03-mission 화면 -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s1-head { position: absolute; left: 0; right: 0; top: 425px; text-align: center; white-space: pre;
+      font-family: "Pretendard", sans-serif; font-weight: 700; font-size: 78px; line-height: 95px; color: #ffffff; }
+    #s1-head span { opacity: 0; }
+    #s1-head span:first-child { opacity: 1; }
+    #s1-sub { position: absolute; left: 0; right: 0; top: 565px; text-align: center;
+      font-family: "Pretendard", sans-serif; font-weight: 600; font-size: 67px; line-height: 90px; color: #edf1ff; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <div id="s1-clip" class="clip" data-start="0" data-duration="2">
+      <p id="s1-head"><span>이</span><span>번</span><span> </span><span>달</span><span> </span><span>미</span><span>션</span></p>
+      <p id="s1-sub">반복 업무를 줄이는 AI 자동화</p>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    document.querySelectorAll("#s1-head span").forEach((el, i) => {
+      if (i === 0) return;
+      tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: f(2), ease: "none" }, f(i * 4));
+    });
+    tl.fromTo("#s1-sub", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, f(32));
+    window.__timelines["s1"] = tl;
+  </script>
+</template>

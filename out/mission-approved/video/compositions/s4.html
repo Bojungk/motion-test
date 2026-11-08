@@ -1,0 +1,31 @@
+<!-- 장면 4 (225–270f): src/parts/button-submit.html state=submit, ×2.8 = 980×123 가운데
+  motion-appear 6f → 머묾 → motion-exit 4f (quick · ease-exit) -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s4-wrap { position: absolute; left: 785px; top: 518px; width: 350px; height: 44px; transform-origin: 50% 50%; }
+    /* ↓ src/parts/button-submit.html 스타일 그대로 (submit 상태) */
+    #button-submit {
+      box-sizing: border-box; width: 350px; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;
+      overflow: hidden; border-radius: 8px; background: #3759de;
+    }
+    #button-submit .label {
+      flex: 1 0 0; min-width: 1px; margin: 0; font-family: "Pretendard", sans-serif;
+      font-weight: 600; font-size: 14px; line-height: 20px; color: #ffffff; text-align: center;
+    }
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <div id="s4-clip" class="clip" data-start="0" data-duration="1.5">
+      <div id="s4-wrap"><div id="s4-in"><div id="button-submit" data-state="submit"><p class="label">제출하기</p></div></div></div>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#s4-wrap", { scale: 2.8 }, 0);
+    tl.fromTo("#s4-in", { y: 16 / 2.8, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, 0);
+    // 6f + 머묾 24f 뒤 motion-exit (8.5초 클릭음과 같은 프레임)
+    tl.fromTo("#s4-in", { opacity: 1 }, { opacity: 0, duration: f(4), ease: "ease-exit" }, f(30));
+    window.__timelines["s4"] = tl;
+  </script>
+</template>

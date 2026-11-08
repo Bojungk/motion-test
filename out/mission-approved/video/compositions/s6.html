@@ -1,0 +1,34 @@
+<!-- 장면 6 (345–390f): 글줄 "미션을 완성했어요!"(04-approved 문구) + src/parts/badge-approved.html ×2.8 = 302×90
+  배지 motion-appear 6f · 글줄 typewriter stagger-type 4f × 10글자 (4f부터). 글줄과 배지 사이 space-large 32 × 2.8 = 90 -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s6-head {
+      position: absolute; left: 0; right: 0; top: 390px; text-align: center; white-space: pre;
+      font-family: "Pretendard", sans-serif; font-weight: 700; font-size: 78px; line-height: 95px; color: #ffffff;
+    }
+    #s6-head span { opacity: 0; }
+    #s6-wrap { position: absolute; left: 906px; top: 559px; width: 108px; height: 32px; transform-origin: 50% 50%; }
+    /* ↓ src/parts/badge-approved.html 스타일 그대로 */
+    #badge-approved { box-sizing: border-box; width: 108px; padding: 8px; overflow: hidden; border-radius: 8px; background: #edf1ff; }
+    #badge-approved .label {
+      width: 92px; margin: 0; font-family: "Pretendard", sans-serif; font-weight: 400; font-size: 12px; line-height: 16px; color: #247a51;
+    }
+  </style>
+  <div id="root" data-composition-id="s6" data-width="1920" data-height="1080">
+    <div id="s6-clip" class="clip" data-start="0" data-duration="1.5">
+      <p id="s6-head"><span>미</span><span>션</span><span>을</span><span> </span><span>완</span><span>성</span><span>했</span><span>어</span><span>요</span><span>!</span></p>
+      <div id="s6-wrap"><div id="s6-in"><div id="badge-approved"><p class="label">승인 완료</p></div></div></div>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#s6-wrap", { scale: 2.8 }, 0);
+    tl.fromTo("#s6-in", { y: 16 / 2.8, opacity: 0 }, { y: 0, opacity: 1, duration: f(6), ease: "ease-enter" }, 0);
+    document.querySelectorAll("#s6-head span").forEach((el, i) => {
+      tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: f(2), ease: "none" }, f(4 + i * 4));
+    });
+    window.__timelines["s6"] = tl;
+  </script>
+</template>

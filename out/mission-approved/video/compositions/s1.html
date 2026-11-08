@@ -1,0 +1,29 @@
+<!-- 장면 1 (0–60f): 글줄 "이번 달 미션"(03-mission 문구). video-headline 78/95 700 · video-text #fff
+  typewriter: stagger-type 4f마다 한 글자 (motion.md 1장, A 00:05 검색창 글자 입력) -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s1-line {
+      position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: center; white-space: pre;
+      font-family: "Pretendard", sans-serif; font-weight: 700; font-size: 78px; line-height: 95px;
+      color: #ffffff;
+    }
+    #s1-line span { opacity: 0; }
+    #s1-line span:first-child { opacity: 1; } /* 첫 프레임부터 첫 글자 */
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <div id="s1-clip" class="clip" data-start="0" data-duration="2">
+      <p id="s1-line"><span>이</span><span>번</span><span> </span><span>달</span><span> </span><span>미</span><span>션</span></p>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    document.querySelectorAll("#s1-line span").forEach((el, i) => {
+      if (i === 0) return;
+      tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: f(2), ease: "none" }, f(i * 4));
+    });
+    window.__timelines["s1"] = tl;
+  </script>
+</template>

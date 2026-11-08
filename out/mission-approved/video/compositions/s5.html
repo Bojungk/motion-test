@@ -1,0 +1,25 @@
+<!-- 장면 5 (270–345f): 04-approved 폰, 컷으로 등장 → hold-beat 15f → push-in 1 → 1.3 (slow 40f · ease-standard, motion.md 5장)
+  밀어 들어가는 중심: 화면의 "승인 완료" 배지 (@2x x≈148 · y≈652 → 폰 안 81 · 358) — 화면을 보고 정한 위치 -->
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s5-phone {
+      position: absolute; left: 745.5px; top: 76px; width: 429px; height: 928px;
+      border-radius: 13px; border: 1px solid #75777c; overflow: hidden;
+      box-shadow: 0 9px 26px #0000001f;
+    }
+    #s5-phone img { display: block; width: 100%; height: 100%; }
+  </style>
+  <div id="root" data-composition-id="s5" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="s5-clip" class="clip" data-start="0" data-duration="2.5">
+      <div id="s5-cam"><div id="s5-phone"><img src="assets/screens/04-approved.png" alt="" /></div></div>
+    </div>
+  </div>
+  <script>
+    const f = (n) => n / 30;
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#s5-cam", { transformOrigin: "826.5px 434px" }, 0); // 745.5+81, 76+358
+    tl.fromTo("#s5-cam", { scale: 1 }, { scale: 1.3, duration: f(40), ease: "ease-standard" }, f(15));
+    window.__timelines["s5"] = tl;
+  </script>
+</template>
